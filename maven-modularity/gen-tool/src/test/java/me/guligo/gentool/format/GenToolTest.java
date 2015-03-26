@@ -42,6 +42,7 @@ public class GenToolTest {
 		genTool.process();
 
 		Assert.assertTrue(Files.exists(tmpDirectory.resolve("src/main/java/me/guligo/beans/impl/FooBean.java")));
+		Assert.assertTrue(Files.exists(tmpDirectory.resolve("src/main/java/me/guligo/tests/beans/impl/FooBeanTest.java")));
 		Assert.assertTrue(Files.exists(tmpDirectory.resolve("pom.xml")));
 	}
 
