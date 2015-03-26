@@ -1,4 +1,4 @@
-package me.guligo.gentool.format;
+package me.guligo.tools.gentool.format;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.guligo.gentool.utils.Utils;
+import me.guligo.tools.gentool.utils.Utils;
 
 /**
  * Responsible for conversion of .gen format into internal data structure.

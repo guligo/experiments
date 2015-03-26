@@ -1,4 +1,4 @@
-package me.guligo.gentool;
+package me.guligo.tools.gentool;
 
 
 import java.io.IOException;

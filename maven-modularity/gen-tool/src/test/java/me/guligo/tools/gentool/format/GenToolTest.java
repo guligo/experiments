@@ -1,10 +1,10 @@
-package me.guligo.gentool.format;
+package me.guligo.tools.gentool.format;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import me.guligo.gentool.format.GenTool;
+import me.guligo.tools.gentool.format.GenTool;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;

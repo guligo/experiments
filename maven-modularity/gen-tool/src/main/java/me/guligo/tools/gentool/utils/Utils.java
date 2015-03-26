@@ -1,4 +1,4 @@
-package me.guligo.gentool.utils;
+package me.guligo.tools.gentool.utils;
 
 /**
  * Contains common helper functions.

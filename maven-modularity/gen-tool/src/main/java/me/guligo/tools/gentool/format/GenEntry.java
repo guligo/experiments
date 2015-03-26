@@ -1,4 +1,4 @@
-package me.guligo.gentool.format;
+package me.guligo.tools.gentool.format;
 
 import java.util.List;
 

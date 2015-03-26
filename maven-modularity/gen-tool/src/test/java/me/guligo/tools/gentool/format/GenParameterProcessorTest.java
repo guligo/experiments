@@ -1,6 +1,6 @@
-package me.guligo.gentool.format;
+package me.guligo.tools.gentool.format;
 
-import me.guligo.gentool.format.GenParameterProcessor;
+import me.guligo.tools.gentool.format.GenParameterProcessor;
 
 import org.junit.Assert;
 import org.junit.Test;

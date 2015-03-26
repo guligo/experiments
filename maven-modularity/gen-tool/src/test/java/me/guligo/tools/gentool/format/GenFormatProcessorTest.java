@@ -1,4 +1,4 @@
-package me.guligo.gentool.format;
+package me.guligo.tools.gentool.format;
 
 import java.io.IOException;
 import java.util.List;
@@ -7,8 +7,8 @@ import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
-import me.guligo.gentool.format.GenEntry;
-import me.guligo.gentool.format.GenFormatProcessor;
+import me.guligo.tools.gentool.format.GenEntry;
+import me.guligo.tools.gentool.format.GenFormatProcessor;
 
 /**
  * Test case class for {@link GenFormatProcessor}.
