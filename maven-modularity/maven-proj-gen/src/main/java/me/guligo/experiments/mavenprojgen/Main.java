@@ -10,11 +10,11 @@ public class Main {
 	private final static int MODULES_PER_LEVEL = 4;
 
 	public static void main(String[] args) throws IOException {
-		// Files.createDirectory(ROOT);
 		doMagic(LEVELS, MODULES_PER_LEVEL);
 	}
 
 	public static void doMagic(int level, int modulesPerLevel) throws IOException {
+		generateCommons("dummy");
 		doMagic(level, "dummy", "", modulesPerLevel);
 	}
 
@@ -24,9 +24,16 @@ public class Main {
 				generateClasses(path, name);
 			}
 
-			String[] newNames = new String[modulesPerLevel];
+			int o = 0;
+			if (level == LEVELS) {
+				o = 1;
+			}
+			String[] newNames = new String[modulesPerLevel + o];
 			for (int i = 0; i < modulesPerLevel; i++) {
 				newNames[i] = name + (char) ('A' + i);
+			}
+			if (level == LEVELS) {
+				newNames[modulesPerLevel + o - 1] = "commons";
 			}
 
 			if (name.isEmpty()) {
@@ -40,20 +47,28 @@ public class Main {
 			}
 
 			for (String newName : newNames) {
-				doMagic(level - 1, path + "/" + newName, newName, modulesPerLevel);
+				if (!"commons".equals(newName)) {
+					doMagic(level - 1, path + "/" + newName, newName, modulesPerLevel);
+				}
 			}
 		}
 	}
 
+	public static void generateCommons(String root) throws IOException {
+		GenTool genTool = new GenTool("gen/tree/commons.gen", "tmp");
+		genTool.setParameter("root", root);
+		genTool.process();
+	}
+
 	public static void generateClasses(String root, String tag) throws IOException {
-		GenTool genTool = new GenTool("classes.gen", "tmp");
+		GenTool genTool = new GenTool("gen/tree/classes.gen", "tmp");
 		genTool.setParameter("root", root);
 		genTool.setParameter("tag", tag);
 		genTool.process();
 	}
 
 	public static void genertePom(String root, String tag, String packaging, String[] modules) throws IOException {
-		GenTool genTool = new GenTool(modules == null ? "pom-xml-flat.gen" : "pom-xml-tree.gen", "tmp");
+		GenTool genTool = new GenTool(modules == null ? "gen/tree/pom-xml-leaf.gen" : "gen/tree/pom-xml-node.gen", "tmp");
 		genTool.setParameter("root", root);
 		genTool.setParameter("tag", tag);
 		genTool.setParameter("packaging", packaging);

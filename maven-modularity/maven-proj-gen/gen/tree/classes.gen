@@ -13,7 +13,7 @@ public class ${tag}Bean extends Bean {
 
 }
 @@@
-${root}/src/main/java/me/guligo/tests/beans/impl/${tag}BeanTest.java
+${root}/src/test/java/me/guligo/tests/beans/impl/${tag}BeanTest.java
 %%%
 package me.guligo.tests.beans.impl;
 
