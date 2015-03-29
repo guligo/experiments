@@ -1,0 +1,91 @@
+${root}/src/main/java/me/guligo/beans/impl/${tag}Bean.java
+%%%
+package me.guligo.beans.impl;
+
+import me.guligo.beans.Bean;
+
+public class ${tag}Bean extends Bean {
+
+	@Override
+	public void setValue(String value) {
+		super.setValue("${tag}" + value);
+	}
+
+}
+@@@
+${root}/src/test/java/me/guligo/tests/beans/impl/${tag}Bean1Test.java
+%%%
+package me.guligo.tests.beans.impl;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import me.guligo.beans.Bean;
+import me.guligo.beans.impl.${tag}Bean;
+
+public class ${tag}Bean1Test {
+
+	@Test
+	public void testABean1() {
+		Bean bean = new ${tag}Bean();
+		bean.setValue("Foo");
+		Assert.assertEquals("${tag}Foo", bean.getValue());
+	}
+
+	@Test
+	public void testABean2() {
+		Bean bean = new ${tag}Bean();
+		bean.setValue("Bar");
+		Assert.assertEquals("${tag}Bar", bean.getValue());
+	}
+
+}
+@@@
+${root}/src/test/java/me/guligo/tests/beans/impl/${tag}Bean2Test.java
+%%%
+package me.guligo.tests.beans.impl;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import me.guligo.beans.Bean;
+import me.guligo.beans.impl.${tag}Bean;
+
+public class ${tag}Bean2Test {
+
+	@Test
+	public void testABean1() {
+		Bean bean = new ${tag}Bean();
+		bean.setValue("Foobar");
+		Assert.assertEquals("${tag}Foobar", bean.getValue());
+	}
+
+	@Test
+	public void testABean2() {
+		Bean bean = new ${tag}Bean();
+		bean.setValue("Barfoo");
+		Assert.assertEquals("${tag}Barfoo", bean.getValue());
+	}
+
+}
+@@@
+${root}/src/test/java/me/guligo/tests/beans/impl/${tag}Bean3Test.java
+%%%
+package me.guligo.tests.beans.impl;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import me.guligo.beans.Bean;
+import me.guligo.beans.impl.${tag}Bean;
+
+public class ${tag}Bean3Test {
+
+	@Test
+	public void testABean1() {
+		Bean bean = new ${tag}Bean();
+		bean.setValue("Baz");
+		Assert.assertEquals("${tag}Baz", bean.getValue());
+	}
+
+}

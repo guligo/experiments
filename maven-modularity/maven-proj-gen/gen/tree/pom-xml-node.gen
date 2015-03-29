@@ -6,6 +6,6 @@ ${root}/pom.xml
 	<groupId>me.guligo.mavenmodularity</groupId>
 	<artifactId>${tag}</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<modules>${modules}</modules>
-	<packaging>${packaging}</packaging>
 </project>
