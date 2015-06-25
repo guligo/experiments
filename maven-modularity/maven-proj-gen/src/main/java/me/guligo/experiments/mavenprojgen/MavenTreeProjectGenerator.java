@@ -8,20 +8,23 @@ import me.guligo.tools.gentool.format.GenTool;
 
 public class MavenTreeProjectGenerator {
 
-	private final static int LEVELS = 3;
-	private final static int MODULES_PER_LEVEL = 5;
+	private final static String PROJECT_DIR = "tmp";
+	private final static String PROJECT_NAME = "maven-proj-tree-twp";
+	private final static int PROJECT_LEVELS = 2;
+	private final static int PROJECT_MODULES_PER_LEVEL = 5;
+	private final static int PROJECT_CLASSES_PER_MODULE = 5 * 125;
 
 	public static void main(String[] args) throws IOException {
 		MavenTreeProjectGenerator projectGenerator = new MavenTreeProjectGenerator();
-		projectGenerator.generateProject("dummy_tree", LEVELS, MODULES_PER_LEVEL);
+		projectGenerator.generateProject(PROJECT_DIR, PROJECT_NAME, PROJECT_LEVELS, PROJECT_MODULES_PER_LEVEL, PROJECT_CLASSES_PER_MODULE);
 	}
 
-	public void generateProject(String projectName, int level, int modulesPerLevel) throws IOException {
-		generateCommons("tmp", projectName);
-		generateProject("tmp", level, projectName, "", modulesPerLevel);
+	public void generateProject(String projectDir, String projectName, int level, int modulesPerLevel, int classesPerModule) throws IOException {
+		generateCommons(projectDir, projectName);
+		generateProject(projectDir, level, projectName, "", modulesPerLevel, classesPerModule);
 	}
 
-	private void generateProject(String projectDir, int level, String path, String name, int modulesPerLevel) throws IOException {
+	private void generateProject(String projectDir, int level, String path, String name, int modulesPerLevel, int classesPerModule) throws IOException {
 		if (level > 0) {
 			List<String> newNames = new ArrayList<String>();
 			for (int i = 0; i < modulesPerLevel; i++) {
@@ -30,7 +33,7 @@ public class MavenTreeProjectGenerator {
 
 			if (level == 1) {
 				generateLeafPom(projectDir, path, name);
-				generateClasses(projectDir, path, name);
+				generateClasses(projectDir, path, name, classesPerModule);
 			} else {
 				if (name.isEmpty()) {
 					newNames.add("commons");
@@ -42,7 +45,7 @@ public class MavenTreeProjectGenerator {
 			}
 
 			for (String newName : newNames) {
-				generateProject(projectDir, level - 1, path + "/" + newName, newName, modulesPerLevel);
+				generateProject(projectDir, level - 1, path + "/" + newName, newName, modulesPerLevel, classesPerModule);
 			}
 		}
 	}
@@ -53,11 +56,14 @@ public class MavenTreeProjectGenerator {
 		genTool.process();
 	}
 
-	private void generateClasses(String projectDir, String rootParamValue, String tagParamValue) throws IOException {
-		GenTool genTool = new GenTool("gen/classes.gen", projectDir);
-		genTool.setParameter("root", rootParamValue);
-		genTool.setParameter("tag", tagParamValue);
-		genTool.process();
+	private void generateClasses(String projectDir, String rootParamValue, String tagParamValue, int classesPerModule) throws IOException {
+		for (int i = 0; i < classesPerModule; i++) {
+			GenTool genTool = new GenTool("gen/classes.gen", projectDir);
+			genTool.setParameter("root", rootParamValue);
+			genTool.setParameter("tag", tagParamValue);
+			genTool.setParameter("index", String.valueOf(i));
+			genTool.process();
+		}
 	}
 
 	private void generateNodePom(String projectDir, String rootParamValue, String tagParamValue, List<String> modules) throws IOException {
