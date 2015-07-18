@@ -43,6 +43,8 @@ call:buildAndMeasureGeneratedProject stage-3-flat
 call:buildAndMeasureGeneratedProject stage-3-tree
 call:buildAndMeasureGeneratedProject stage-4-flat
 call:buildAndMeasureGeneratedProject stage-4-tree
+call:buildAndMeasureGeneratedProject stage-5-flat
+call:buildAndMeasureGeneratedProject stage-5-tree
 
 rem Return to starting point
 
