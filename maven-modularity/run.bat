@@ -2,8 +2,7 @@
 
 rem Remove possible left-overs
 
-del results
-rd /S /Q generated
+call clean.bat
 
 rem Generate Maven projects
 
