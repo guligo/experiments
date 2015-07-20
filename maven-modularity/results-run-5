@@ -1,0 +1,20 @@
+stage-1-flat 
+[INFO] Total time: 12.384 s
+stage-1-tree 
+[INFO] Total time: 18.238 s
+stage-2-flat 
+[INFO] Total time: 10.177 s
+stage-2-tree 
+[INFO] Total time: 35.707 s
+stage-3-flat 
+[INFO] Total time: 16.403 s
+stage-3-tree 
+[INFO] Total time: 43.911 s
+stage-4-flat 
+[INFO] Total time: 01:26 min
+stage-4-tree 
+[INFO] Total time: 01:55 min
+stage-5-flat 
+[INFO] Total time: 02:47 min
+stage-5-tree 
+[INFO] Total time: 03:11 min
