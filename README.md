@@ -8,4 +8,4 @@ This repository contains various projects whose main purpose is experimenting wi
 
 ### maven-modularity
 
-Check out [this](TODO) blog post.
+Check out [this](https://guligo.wordpress.com/2015/03/23/price-of-over-modularity-with-maven) blog post.
