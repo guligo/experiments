@@ -1,0 +1,21 @@
+# Compilation result #
+*.class
+
+# Package files #
+*.jar
+*.war
+*.ear
+
+# Project files and folders #
+build/
+bin/
+target/
+
+# IDE files and folders #
+.settings/
+.classpath
+.project
+
+# Other
+data/
+dependency-reduced-pom.xml

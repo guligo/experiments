@@ -1,0 +1,17 @@
+database:
+  driverClass: org.hsqldb.jdbcDriver
+  user: SA
+  url: jdbc:hsqldb:data/database
+  validationQuery: select 1 from information_schema.system_users
+
+server:
+  applicationConnectors:
+    - type: http
+      port: 9090
+
+logging:
+  level: INFO
+  loggers:
+    me.guligo.dropwizard: DEBUG
+  appenders:
+    - type: console
