@@ -6,7 +6,7 @@ import me.guligo.ducksim.ducks.MallardDuck;
 import me.guligo.ducksim.ducks.ModelDuck;
 
 /**
- * Following is an example of strategy pattern. The "strategy pattern defines" a
+ * Following is an example of strategy pattern. The "strategy pattern" defines a
  * family of algorithms, encapsulates each one, and makes them interchangeable.
  * Strategy lets the algorithm vary independently from clients that use it.
  * 
