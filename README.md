@@ -17,3 +17,7 @@ Just playing around with [Dropwizard](http://www.dropwizard.io/) framework. Refe
 ### design-patterns
 
 Experimenting with OO design patterns.
+
+### geometry
+
+Having fun with TDD and clean-coding.
