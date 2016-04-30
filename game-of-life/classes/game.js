@@ -2,13 +2,15 @@ var Game = function(spec) {
     this.canvas = spec.canvas;
     this.rows = spec.rows;
     this.columns = spec.columns;
+    this.style = spec.style || {};
 
     var board = new Board({
         canvasContext: this.canvas.getContext('2d'),
         width: this.canvas.width,
         height: this.canvas.height,
-        rows: spec.rows,
-        columns: spec.columns
+        rows: this.rows,
+        columns: this.columns,
+        style: this.style
     });
     for (var r = 0; r < this.rows; r++) {
         for (var c = 0; c < this.columns; c++) {
@@ -17,22 +19,29 @@ var Game = function(spec) {
     }
 
     var play = true;
-    var boundingRect = canvas.getBoundingClientRect();
 
     this.canvas.onclick = function(event) {
-        if (!play) {
-            board.makeChange(event.clientX - boundingRect.left, event.clientY - boundingRect.top);
+        if (play) {
+            var boundingRect = canvas.getBoundingClientRect();
+            board.makeBigExplosion(event.clientX - boundingRect.left, event.clientY - boundingRect.top);
+        } else {
+            var boundingRect = canvas.getBoundingClientRect();
+            board.switchCellState(event.clientX - boundingRect.left, event.clientY - boundingRect.top);
             board.draw();
         }
     };
     this.canvas.onmousemove = function(event) {
         if (play) {
+            var boundingRect = canvas.getBoundingClientRect();
             board.makeExplosion(event.clientX - boundingRect.left, event.clientY - boundingRect.top);
         }
     };
-    canvas.oncontextmenu = function (e) {
-        e.preventDefault();
+    this.canvas.oncontextmenu = function(event) {
+        event.preventDefault();
         play = !play;
+        if (!play) {
+            board.draw();
+        }
     };
 
     var framesPerSecond = 25;
@@ -49,4 +58,17 @@ var Game = function(spec) {
         window.requestAnimationFrame(frame);
     }
     frame();
+};
+
+Game.prototype.start = function() {
+
+};
+
+Game.prototype.stop = function() {
+};
+
+Game.prototype.destroy = function() {
+    this.canvas.onclick = null;
+    this.canvas.onmousemove = null;
+    this.canvas.oncontextmenu = null;
 };

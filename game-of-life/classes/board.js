@@ -7,16 +7,30 @@ var Board = function(spec) {
     this.columns = spec.columns;
     this.cellWidth = Math.round(this.width / this.columns);
     this.cellHeight = Math.round(this.height / this.rows);
+    this.style = spec.style;
 };
 
 extend(Board, Drawable);
 
 Board.prototype.addCell = function(row, column) {
+    var cellWidth = this.cellWidth;
+    var x = column * cellWidth;
+    if ((x + cellWidth < this.width) && (x + 2 * cellWidth > this.width)) {
+        cellWidth = this.width - x;
+    }
+
+    var cellHeight = this.cellHeight;
+    var y = row * cellHeight;
+    if ((y + cellHeight < this.height) && (y + 2 * cellHeight > this.height)) {
+        cellHeight = this.height - y;
+    }
+
     this.addChild(new Cell({
         x: column * this.cellWidth,
         y: row * this.cellHeight,
-        width: this.cellWidth,
-        height: this.cellHeight,
+        width: cellWidth,
+        height: cellHeight,
+        style: this.style
     }));
 };
 
@@ -24,16 +38,12 @@ Board.prototype.setCellState = function(row, column, state) {
     setCellState.call(this, row, column, state);
 };
 
-Board.prototype.makeChange = function(x, y) {
+Board.prototype.switchCellState = function(x, y) {
     var r = getRow.call(this, y);
     var c = getColumn.call(this, x);
 
     var cell = this.children[r * this.columns + c];
-    if (cell.getState() === Constants.STATE_ALIVE) {
-        cell.setState(Constants.STATE_DEAD);
-    } else if (cell.getState() === Constants.STATE_DEAD) {
-        cell.setState(Constants.STATE_ALIVE);
-    }
+    cell.switchState();
 };
 
 Board.prototype.makeExplosion = function(x, y) {
@@ -54,24 +64,47 @@ Board.prototype.makeExplosion = function(x, y) {
     });
 };
 
-Board.prototype.draw = function(dryRun) {
+Board.prototype.makeBigExplosion = function(x, y) {
+    this.makeExplosion(x, y);
+
+    var r = getRow.call(this, y);
+    var c = getColumn.call(this, x);
+
+    var cells = [];
+    cells.push(this.children[(r + 2) * this.columns + c]);
+    cells.push(this.children[(r - 2) * this.columns + c]);
+    cells.push(this.children[r * this.columns + (c - 2)]);
+    cells.push(this.children[r * this.columns + (c + 2)]);
+    cells.push(this.children[(r + 1) * this.columns + (c + 1)]);
+    cells.push(this.children[(r + 1) * this.columns + (c - 1)]);
+    cells.push(this.children[(r - 1) * this.columns + (c + 1)]);
+    cells.push(this.children[(r - 1) * this.columns + (c - 1)]);
+
+    cells.forEach(function(cell) {
+        if (cell) {
+            cell.setState(Constants.STATE_ALIVE);
+        }
+    });
+};
+
+Board.prototype.draw = function() {
     this.canvasContext.clearRect(0, 0, this.width, this.height);
 
-    if (!dryRun) {
-        Board.parent.draw.call(this);
-    }
+    Board.parent.draw.call(this);
 
-    this.canvasContext.beginPath();
-    for (var c = 0; c <= this.columns; c++) {
-        this.canvasContext.moveTo(c * this.cellWidth + (c < this.columns ? 0.5 : 0), 0);
-        this.canvasContext.lineTo(c * this.cellWidth + (c < this.columns ? 0.5 : 0), this.height);
+    if (this.style.showGrid) {
+        this.canvasContext.beginPath();
+        for (var c = 0; c <= this.columns; c++) {
+            this.canvasContext.moveTo(c * this.cellWidth + (c < this.columns ? 0.5 : 0), 0);
+            this.canvasContext.lineTo(c * this.cellWidth + (c < this.columns ? 0.5 : 0), this.height);
+        }
+        for (var r = 0; r <= this.rows; r++) {
+            this.canvasContext.moveTo(0, r * this.cellHeight + (r < this.rows ? 0.5 : 0));
+            this.canvasContext.lineTo(this.width, r * this.cellHeight + (r < this.rows ? 0.5 : 0));
+        }
+        this.canvasContext.lineWidth = 1;
+        this.canvasContext.stroke();
     }
-    for (var r = 0; r <= this.rows; r++) {
-        this.canvasContext.moveTo(0, r * this.cellHeight + (r < this.rows ? 0.5 : 0));
-        this.canvasContext.lineTo(this.width, r * this.cellHeight + (r < this.rows ? 0.5 : 0));
-    }
-    this.canvasContext.lineWidth = 1;
-    this.canvasContext.stroke();
 };
 
 Board.prototype.iterate = function() {
