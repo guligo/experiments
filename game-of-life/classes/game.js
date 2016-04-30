@@ -1,29 +1,52 @@
 var Game = function(spec) {
     this.canvas = spec.canvas;
-    this.height = spec.height;
-    this.width = spec.width;
-
-    var cellWidth = this.canvas.width / this.width;
-    var cellHeight = this.canvas.height / this.height;
+    this.rows = spec.rows;
+    this.columns = spec.columns;
 
     var board = new Board({
-        canvasContext: spec.canvas.getContext('2d'),
-        width: spec.width,
-        height: spec.height,
-        cellWidth: cellWidth,
-        cellHeight: cellHeight
+        canvasContext: this.canvas.getContext('2d'),
+        width: this.canvas.width,
+        height: this.canvas.height,
+        rows: spec.rows,
+        columns: spec.columns
     });
-    for (var h = 0; h < this.height; h++) {
-        for (var w = 0; w < this.width; w++) {
-            board.addChild(new Cell({
-                x: w * cellWidth,
-                y: h * cellHeight,
-                width: cellWidth,
-                height: cellHeight,
-            }));
+    for (var r = 0; r < this.rows; r++) {
+        for (var c = 0; c < this.columns; c++) {
+            board.addCell(r, c);
         }
     }
-    board.setCellState(0, 0, Constants.STATE_ALIVE);
-    board.setCellState(5, 10, Constants.STATE_ALIVE);
-    board.draw();
+
+    var play = true;
+    var boundingRect = canvas.getBoundingClientRect();
+
+    this.canvas.onclick = function(event) {
+        if (!play) {
+            board.makeChange(event.clientX - boundingRect.left, event.clientY - boundingRect.top);
+            board.draw();
+        }
+    };
+    this.canvas.onmousemove = function(event) {
+        if (play) {
+            board.makeExplosion(event.clientX - boundingRect.left, event.clientY - boundingRect.top);
+        }
+    };
+    canvas.oncontextmenu = function (e) {
+        e.preventDefault();
+        play = !play;
+    };
+
+    var framesPerSecond = 25;
+    var frameInterval = 1000 / framesPerSecond;
+    var frameTimestamp = 0;
+
+    var frame = function() {
+        var now = Date.now();
+        if (play && now - frameTimestamp >= frameInterval) {
+            board.draw();
+            frameTimestamp = now;
+            board.iterate();
+        }
+        window.requestAnimationFrame(frame);
+    }
+    frame();
 };

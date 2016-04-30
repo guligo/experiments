@@ -11,11 +11,17 @@ var Cell = function(spec) {
 extend(Cell, Drawable);
 
 Cell.prototype.setState = function(state) {
-    this.state = Constants.STATE_ALIVE;
+    this.state = state;
+};
+
+Cell.prototype.getState = function(state) {
+    return this.state;
 };
 
 Cell.prototype.draw = function(parentCanvasContext) {
     if (this.state === Constants.STATE_ALIVE) {
+        parentCanvasContext.beginPath();
+        parentCanvasContext.fillStyle = 'block';
         parentCanvasContext.rect(this.x, this.y, this.width, this.height);
         parentCanvasContext.fill();
     }
