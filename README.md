@@ -4,7 +4,7 @@
 
 This repository contains various projects whose main purpose is experimenting with tools, frameworks and technologies.
 
-## Bill of materials
+## Subprojects
 
 ### maven-modularity
 
@@ -21,3 +21,7 @@ Experimenting with OO design patterns.
 ### geometry
 
 Having fun with TDD and clean-coding.
+
+### game-of-life
+
+Implementation of Conway's game of life in JS using OOP principles and HTML5 canvas.
