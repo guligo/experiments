@@ -1,0 +1,34 @@
+<html>
+    <body>
+        <canvas id="canvas" />
+
+        <script type="text/javascript" src="https://cdn.rawgit.com/guligo/experiments/master/game-of-life/common.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/guligo/experiments/master/game-of-life/constants.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/guligo/experiments/master/game-of-life/drawable.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/guligo/experiments/master/game-of-life/cell.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/guligo/experiments/master/game-of-life/board.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/guligo/experiments/master/game-of-life/game.js"></script>
+        <script type="text/javascript">
+            var startGameOfLife = function(canvas) {
+                canvas.width = 400;
+                canvas.height = 400;
+
+                game = new Game({
+                    canvas: canvas,
+                    columns: Math.round(canvas.width / 15),
+                    rows: Math.round(canvas.height / 15),
+                    style: {
+                        showGrid: false,
+                        boardColor: '#000000',
+                        boardAlpha: '0.2',
+                        boardTransparent: false,
+                        aliveCellTransparent: true
+                    }
+                });
+                game.start();
+            };
+
+            startGameOfLife(document.getElementById('canvas'));
+        </script>
+    </body>
+</html>
