@@ -36,13 +36,8 @@ Cell.prototype.draw = function(parentCanvasContext) {
             parentCanvasContext.fillStyle = this.style.aliveCellColor || '#000000';
             parentCanvasContext.rect(this.x, this.y, this.width, this.height);
             parentCanvasContext.fill();
-        }
-    } else if (this.state === Constants.STATE_DEAD) {
-        if (!this.style.deadCellTransparent) {
-            parentCanvasContext.beginPath();
-            parentCanvasContext.fillStyle = this.style.deadCellColor || '#ffffff';
-            parentCanvasContext.rect(this.x, this.y, this.width, this.height);
-            parentCanvasContext.fill();
+        } else {
+            parentCanvasContext.clearRect(this.x, this.y, this.width, this.height);
         }
     }
 };

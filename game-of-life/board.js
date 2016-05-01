@@ -89,6 +89,15 @@ Board.prototype.makeBigExplosion = function(x, y) {
 
 Board.prototype.draw = function() {
     this.canvasContext.clearRect(0, 0, this.width, this.height);
+    if (!this.style.boardTransparent) {
+        this.canvasContext.beginPath();
+        if (this.style.boardAlpha) {
+            this.canvasContext.globalAlpha = this.style.boardAlpha;
+        }
+        this.canvasContext.fillStyle = this.style.boardColor || '#000000';
+        this.canvasContext.rect(0, 0, this.width, this.height);
+        this.canvasContext.fill();
+    }
 
     Board.parent.draw.call(this);
 
