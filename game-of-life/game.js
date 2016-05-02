@@ -2,6 +2,7 @@ var Game = function(spec) {
     this.canvas = spec.canvas;
     this.rows = spec.rows;
     this.columns = spec.columns;
+    this.fps = spec.fps || 25;
     this.style = spec.style || {};
     this.play = true;
 
@@ -23,8 +24,7 @@ var Game = function(spec) {
 };
 
 Game.prototype.start = function() {
-    var framesPerSecond = 25;
-    var frameInterval = 1000 / framesPerSecond;
+    var frameInterval = 1000 / this.fps;
     var frameTimestamp = 0;
 
     var frame = function() {

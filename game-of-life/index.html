@@ -2,12 +2,22 @@
     <body>
         <canvas id="canvas" />
 
+        <!--
         <script type="text/javascript" src="https://cdn.rawgit.com/guligo/experiments/master/game-of-life/common.js"></script>
         <script type="text/javascript" src="https://cdn.rawgit.com/guligo/experiments/master/game-of-life/constants.js"></script>
         <script type="text/javascript" src="https://cdn.rawgit.com/guligo/experiments/master/game-of-life/drawable.js"></script>
         <script type="text/javascript" src="https://cdn.rawgit.com/guligo/experiments/master/game-of-life/cell.js"></script>
         <script type="text/javascript" src="https://cdn.rawgit.com/guligo/experiments/master/game-of-life/board.js"></script>
         <script type="text/javascript" src="https://cdn.rawgit.com/guligo/experiments/master/game-of-life/game.js"></script>
+        -->
+
+        <script type="text/javascript" src="common.js"></script>
+        <script type="text/javascript" src="constants.js"></script>
+        <script type="text/javascript" src="drawable.js"></script>
+        <script type="text/javascript" src="cell.js"></script>
+        <script type="text/javascript" src="board.js"></script>
+        <script type="text/javascript" src="game.js"></script>
+
         <script type="text/javascript">
             var startGameOfLife = function(canvas) {
                 canvas.width = 400;
@@ -15,8 +25,9 @@
 
                 game = new Game({
                     canvas: canvas,
-                    columns: Math.round(canvas.width / 15),
                     rows: Math.round(canvas.height / 15),
+                    columns: Math.round(canvas.width / 15),
+                    fps: 25,
                     style: {
                         showGrid: false,
                         boardColor: '#000000',
