@@ -26,6 +26,6 @@ Having fun with TDD and clean-coding.
 
 Implementation of Conway's game of life in JavaScript using OOP principles and HTML5 canvas.
 
-### SPOJ
+### spoj
 
 Solutions for [Sphere Online Judge](http://spoj.com).
