@@ -1,6 +1,6 @@
 # Experiments
 
-## About
+## Info
 
 This repository contains various projects whose main purpose is experimenting with tools, frameworks and technologies.
 
