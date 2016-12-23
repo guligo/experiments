@@ -1,0 +1,26 @@
+{
+  "name": "telekom-fon-session-upkeeper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "sleep": "^5.0.0",
+    "zombie": "^5.0.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guligo/telekom-fon-session-upkeeper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guligo/telekom-fon-session-upkeeper/issues"
+  },
+  "homepage": "https://github.com/guligo/telekom-fon-session-upkeeper#readme"
+}
