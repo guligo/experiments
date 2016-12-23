@@ -29,3 +29,7 @@ Implementation of Conway's game of life in JavaScript using OOP principles and H
 ### spoj
 
 Solutions for [Sphere Online Judge](http://spoj.com).
+
+### telekom-fon-session-upkeeper
+
+Utility that keeps user connected with unstable Telekom_FON hotspot.
