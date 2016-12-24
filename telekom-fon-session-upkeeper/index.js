@@ -1,3 +1,4 @@
+require('console-stamp')(console, 'HH:MM:ss');
 require('fs').readFile('config.json', 'utf8', function(error, content) {
 
     // config
@@ -6,7 +7,7 @@ require('fs').readFile('config.json', 'utf8', function(error, content) {
     // constants
     const PAUSE_BEFORE_AUTH = 60000;
     const PAUSE_AFTER_AUTH = 60000;
-    const PAUSE_AFTER_SUCCESS = 30000;
+    const PAUSE_AFTER_SUCCESS = 15000;
     const PAUSE_AFTER_ERROR = 30000;
 
     const TARGET = config.target;
@@ -32,7 +33,7 @@ require('fs').readFile('config.json', 'utf8', function(error, content) {
                         .visit(response.request.url, function() {
                             var pageLoadEndTime = Date.now();
                             var pageLoadTime = (pageLoadEndTime - pageLoadStartTime) / 1000;
-                            console.log(colors.yellow('Telekom Fon login portal was hit, loading time = [' + pageLoadTime + 's]'));
+                            console.log(colors.yellow('Login portal was hit, loading time = [' + pageLoadTime + 's]'));
 
                             var authenticateSession = function() {
                                 try {
