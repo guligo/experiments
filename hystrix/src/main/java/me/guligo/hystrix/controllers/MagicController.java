@@ -2,6 +2,8 @@ package me.guligo.hystrix.controllers;
 
 import me.guligo.hystrix.commands.MagicCommand;
 import me.guligo.hystrix.services.MagicService;
+import rx.Observable;
+import rx.functions.Action1;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -27,18 +29,30 @@ public final class MagicController {
     @GET
     @Path("make")
     @Produces(MediaType.TEXT_PLAIN)
-    public void startMagicExperiment(@QueryParam("sampleCount") int sampleCount, @QueryParam("samplingPause") int samplingPause) {
-        for (int sampleNumber = 0; sampleNumber < sampleCount; sampleNumber++) {
-            try {
-                Thread.sleep(samplingPause);
-                System.out.printf("Sample %s%n", sampleNumber);
+    public String startMagicExperiment(@QueryParam("sampleCount") final int sampleCount, @QueryParam("samplingPause") final int samplingPause) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int sampleNumber = 1; sampleNumber <= sampleCount; sampleNumber++) {
+                    try {
+                        Thread.sleep(samplingPause);
 
-                final MagicCommand magicCommand = new MagicCommand(magicService);
-                System.out.printf("Result of magic command = %s%n", magicCommand.execute());
-            } catch (Exception e) {
-                // not interested
+                        final MagicCommand magicCommand = new MagicCommand(magicService);
+                        final Observable<Integer> magicObservable = magicCommand.observe();
+                        final int sampleNumberAsConstant = sampleNumber;
+                        magicObservable.subscribe(new Action1<Integer>() {
+                            @Override
+                            public void call(final Integer magicNumber) {
+                                System.out.printf("Result of magic command %s is %s%n", sampleNumberAsConstant, magicNumber);
+                            }
+                        });
+                    } catch (Exception e) {
+                        // not interested
+                    }
+                }
             }
-        }
+        }).start();
+        return "Magic experiment successfully started";
     }
 
 }

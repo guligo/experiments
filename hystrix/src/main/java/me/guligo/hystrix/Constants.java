@@ -7,6 +7,6 @@ public final class Constants {
     }
 
     public final static int SERVER_PORT = 8080;
-    public final static double SERVER_FAILURE_PERCENTAGE = 0.75;
+    public final static double SERVER_FAILURE_PERCENTAGE = 0.5;
 
 }
