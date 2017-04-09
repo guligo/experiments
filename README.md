@@ -33,3 +33,7 @@ Solutions for [Sphere Online Judge](http://spoj.com).
 ### telekom-fon-session-upkeeper
 
 Utility that keeps user connected with unstable Telekom_FON hotspot.
+
+### hystrix
+
+Netflix's [Hystrix](https://github.com/Netflix/Hystrix/wiki/) command, circuit breaker and dashboard test.
