@@ -37,3 +37,7 @@ Utility that keeps user connected with unstable Telekom_FON hotspot.
 ### hystrix
 
 Netflix's [Hystrix](https://github.com/Netflix/Hystrix/wiki/) command, circuit breaker and dashboard test.
+
+### tools
+
+Contains trivial miscellaneous software tools and components for various purposes.
