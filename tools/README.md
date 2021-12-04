@@ -8,4 +8,4 @@ This repository contains trivial miscellaneous software tools and components for
 
 ### gen-tool
 
-Primitive tool for generation of files / folders / content based on ["proprietary" format](https://github.com/guligo/tools/blob/master/gen-tool/src/test/resources/test-gen-tool.gen).
+Primitive tool for generation of files / folders / content based on ["proprietary" format](https://github.com/guligo/experiments/blob/master/tools/gen-tool/src/test/resources/test-gen-tool.gen).
